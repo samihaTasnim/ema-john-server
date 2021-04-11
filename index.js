@@ -27,12 +27,13 @@ client.connect(err => {
   })
 
   app.get('/products', (req, res) => {
-    collection.find({})
+    collection.find({name: {$regex: req.query.search}})
     .toArray((err, documents) => {
       res.send(documents)
       console.log(err);
     })
   })
+
 
   app.get('/', (req, res) => {
       res.send('hello!')
